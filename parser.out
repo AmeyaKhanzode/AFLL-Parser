@@ -1,0 +1,684 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> statement
+Rule 1     statement -> IDENTIFIER EQUALS expression
+Rule 2     expression -> expression PLUS expression
+Rule 3     expression -> expression MINUS expression
+Rule 4     expression -> expression TIMES expression
+Rule 5     expression -> expression DIVIDE expression
+Rule 6     expression -> NUMBER
+Rule 7     expression -> IDENTIFIER
+Rule 8     expression -> LPAREN expression RPAREN
+Rule 9     expression -> expression LESS expression
+Rule 10    expression -> expression GREATER expression
+Rule 11    statement -> IF expression COLON statement
+Rule 12    statement -> IF expression COLON statement ELSE COLON statement
+Rule 13    statement -> statement statement
+
+Terminals, with rules where they appear
+
+COLON                : 11 12 12
+DIVIDE               : 5
+ELSE                 : 12
+EQUALS               : 1
+GREATER              : 10
+IDENTIFIER           : 1 7
+IF                   : 11 12
+LESS                 : 9
+LPAREN               : 8
+MINUS                : 3
+NUMBER               : 6
+PLUS                 : 2
+RPAREN               : 8
+TIMES                : 4
+error                : 
+
+Nonterminals, with rules where they appear
+
+expression           : 1 2 2 3 3 4 4 5 5 8 9 9 10 10 11 12
+statement            : 11 12 12 13 13 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . statement
+    (1) statement -> . IDENTIFIER EQUALS expression
+    (11) statement -> . IF expression COLON statement
+    (12) statement -> . IF expression COLON statement ELSE COLON statement
+    (13) statement -> . statement statement
+
+    IDENTIFIER      shift and go to state 2
+    IF              shift and go to state 3
+
+    statement                      shift and go to state 1
+
+state 1
+
+    (0) S' -> statement .
+    (13) statement -> statement . statement
+    (1) statement -> . IDENTIFIER EQUALS expression
+    (11) statement -> . IF expression COLON statement
+    (12) statement -> . IF expression COLON statement ELSE COLON statement
+    (13) statement -> . statement statement
+
+    IDENTIFIER      shift and go to state 2
+    IF              shift and go to state 3
+
+    statement                      shift and go to state 4
+
+state 2
+
+    (1) statement -> IDENTIFIER . EQUALS expression
+
+    EQUALS          shift and go to state 5
+
+
+state 3
+
+    (11) statement -> IF . expression COLON statement
+    (12) statement -> IF . expression COLON statement ELSE COLON statement
+    (2) expression -> . expression PLUS expression
+    (3) expression -> . expression MINUS expression
+    (4) expression -> . expression TIMES expression
+    (5) expression -> . expression DIVIDE expression
+    (6) expression -> . NUMBER
+    (7) expression -> . IDENTIFIER
+    (8) expression -> . LPAREN expression RPAREN
+    (9) expression -> . expression LESS expression
+    (10) expression -> . expression GREATER expression
+
+    NUMBER          shift and go to state 7
+    IDENTIFIER      shift and go to state 8
+    LPAREN          shift and go to state 9
+
+    expression                     shift and go to state 6
+
+state 4
+
+    (13) statement -> statement statement .
+    (13) statement -> statement . statement
+    (1) statement -> . IDENTIFIER EQUALS expression
+    (11) statement -> . IF expression COLON statement
+    (12) statement -> . IF expression COLON statement ELSE COLON statement
+    (13) statement -> . statement statement
+
+  ! shift/reduce conflict for IDENTIFIER resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+    $end            reduce using rule 13 (statement -> statement statement .)
+    ELSE            reduce using rule 13 (statement -> statement statement .)
+    IDENTIFIER      shift and go to state 2
+    IF              shift and go to state 3
+
+  ! IDENTIFIER      [ reduce using rule 13 (statement -> statement statement .) ]
+  ! IF              [ reduce using rule 13 (statement -> statement statement .) ]
+
+    statement                      shift and go to state 4
+
+state 5
+
+    (1) statement -> IDENTIFIER EQUALS . expression
+    (2) expression -> . expression PLUS expression
+    (3) expression -> . expression MINUS expression
+    (4) expression -> . expression TIMES expression
+    (5) expression -> . expression DIVIDE expression
+    (6) expression -> . NUMBER
+    (7) expression -> . IDENTIFIER
+    (8) expression -> . LPAREN expression RPAREN
+    (9) expression -> . expression LESS expression
+    (10) expression -> . expression GREATER expression
+
+    NUMBER          shift and go to state 7
+    IDENTIFIER      shift and go to state 8
+    LPAREN          shift and go to state 9
+
+    expression                     shift and go to state 10
+
+state 6
+
+    (11) statement -> IF expression . COLON statement
+    (12) statement -> IF expression . COLON statement ELSE COLON statement
+    (2) expression -> expression . PLUS expression
+    (3) expression -> expression . MINUS expression
+    (4) expression -> expression . TIMES expression
+    (5) expression -> expression . DIVIDE expression
+    (9) expression -> expression . LESS expression
+    (10) expression -> expression . GREATER expression
+
+    COLON           shift and go to state 11
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 13
+    TIMES           shift and go to state 14
+    DIVIDE          shift and go to state 15
+    LESS            shift and go to state 16
+    GREATER         shift and go to state 17
+
+
+state 7
+
+    (6) expression -> NUMBER .
+
+    COLON           reduce using rule 6 (expression -> NUMBER .)
+    PLUS            reduce using rule 6 (expression -> NUMBER .)
+    MINUS           reduce using rule 6 (expression -> NUMBER .)
+    TIMES           reduce using rule 6 (expression -> NUMBER .)
+    DIVIDE          reduce using rule 6 (expression -> NUMBER .)
+    LESS            reduce using rule 6 (expression -> NUMBER .)
+    GREATER         reduce using rule 6 (expression -> NUMBER .)
+    IDENTIFIER      reduce using rule 6 (expression -> NUMBER .)
+    IF              reduce using rule 6 (expression -> NUMBER .)
+    $end            reduce using rule 6 (expression -> NUMBER .)
+    ELSE            reduce using rule 6 (expression -> NUMBER .)
+    RPAREN          reduce using rule 6 (expression -> NUMBER .)
+
+
+state 8
+
+    (7) expression -> IDENTIFIER .
+
+    COLON           reduce using rule 7 (expression -> IDENTIFIER .)
+    PLUS            reduce using rule 7 (expression -> IDENTIFIER .)
+    MINUS           reduce using rule 7 (expression -> IDENTIFIER .)
+    TIMES           reduce using rule 7 (expression -> IDENTIFIER .)
+    DIVIDE          reduce using rule 7 (expression -> IDENTIFIER .)
+    LESS            reduce using rule 7 (expression -> IDENTIFIER .)
+    GREATER         reduce using rule 7 (expression -> IDENTIFIER .)
+    IDENTIFIER      reduce using rule 7 (expression -> IDENTIFIER .)
+    IF              reduce using rule 7 (expression -> IDENTIFIER .)
+    $end            reduce using rule 7 (expression -> IDENTIFIER .)
+    ELSE            reduce using rule 7 (expression -> IDENTIFIER .)
+    RPAREN          reduce using rule 7 (expression -> IDENTIFIER .)
+
+
+state 9
+
+    (8) expression -> LPAREN . expression RPAREN
+    (2) expression -> . expression PLUS expression
+    (3) expression -> . expression MINUS expression
+    (4) expression -> . expression TIMES expression
+    (5) expression -> . expression DIVIDE expression
+    (6) expression -> . NUMBER
+    (7) expression -> . IDENTIFIER
+    (8) expression -> . LPAREN expression RPAREN
+    (9) expression -> . expression LESS expression
+    (10) expression -> . expression GREATER expression
+
+    NUMBER          shift and go to state 7
+    IDENTIFIER      shift and go to state 8
+    LPAREN          shift and go to state 9
+
+    expression                     shift and go to state 18
+
+state 10
+
+    (1) statement -> IDENTIFIER EQUALS expression .
+    (2) expression -> expression . PLUS expression
+    (3) expression -> expression . MINUS expression
+    (4) expression -> expression . TIMES expression
+    (5) expression -> expression . DIVIDE expression
+    (9) expression -> expression . LESS expression
+    (10) expression -> expression . GREATER expression
+
+    IDENTIFIER      reduce using rule 1 (statement -> IDENTIFIER EQUALS expression .)
+    IF              reduce using rule 1 (statement -> IDENTIFIER EQUALS expression .)
+    $end            reduce using rule 1 (statement -> IDENTIFIER EQUALS expression .)
+    ELSE            reduce using rule 1 (statement -> IDENTIFIER EQUALS expression .)
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 13
+    TIMES           shift and go to state 14
+    DIVIDE          shift and go to state 15
+    LESS            shift and go to state 16
+    GREATER         shift and go to state 17
+
+
+state 11
+
+    (11) statement -> IF expression COLON . statement
+    (12) statement -> IF expression COLON . statement ELSE COLON statement
+    (1) statement -> . IDENTIFIER EQUALS expression
+    (11) statement -> . IF expression COLON statement
+    (12) statement -> . IF expression COLON statement ELSE COLON statement
+    (13) statement -> . statement statement
+
+    IDENTIFIER      shift and go to state 2
+    IF              shift and go to state 3
+
+    statement                      shift and go to state 19
+
+state 12
+
+    (2) expression -> expression PLUS . expression
+    (2) expression -> . expression PLUS expression
+    (3) expression -> . expression MINUS expression
+    (4) expression -> . expression TIMES expression
+    (5) expression -> . expression DIVIDE expression
+    (6) expression -> . NUMBER
+    (7) expression -> . IDENTIFIER
+    (8) expression -> . LPAREN expression RPAREN
+    (9) expression -> . expression LESS expression
+    (10) expression -> . expression GREATER expression
+
+    NUMBER          shift and go to state 7
+    IDENTIFIER      shift and go to state 8
+    LPAREN          shift and go to state 9
+
+    expression                     shift and go to state 20
+
+state 13
+
+    (3) expression -> expression MINUS . expression
+    (2) expression -> . expression PLUS expression
+    (3) expression -> . expression MINUS expression
+    (4) expression -> . expression TIMES expression
+    (5) expression -> . expression DIVIDE expression
+    (6) expression -> . NUMBER
+    (7) expression -> . IDENTIFIER
+    (8) expression -> . LPAREN expression RPAREN
+    (9) expression -> . expression LESS expression
+    (10) expression -> . expression GREATER expression
+
+    NUMBER          shift and go to state 7
+    IDENTIFIER      shift and go to state 8
+    LPAREN          shift and go to state 9
+
+    expression                     shift and go to state 21
+
+state 14
+
+    (4) expression -> expression TIMES . expression
+    (2) expression -> . expression PLUS expression
+    (3) expression -> . expression MINUS expression
+    (4) expression -> . expression TIMES expression
+    (5) expression -> . expression DIVIDE expression
+    (6) expression -> . NUMBER
+    (7) expression -> . IDENTIFIER
+    (8) expression -> . LPAREN expression RPAREN
+    (9) expression -> . expression LESS expression
+    (10) expression -> . expression GREATER expression
+
+    NUMBER          shift and go to state 7
+    IDENTIFIER      shift and go to state 8
+    LPAREN          shift and go to state 9
+
+    expression                     shift and go to state 22
+
+state 15
+
+    (5) expression -> expression DIVIDE . expression
+    (2) expression -> . expression PLUS expression
+    (3) expression -> . expression MINUS expression
+    (4) expression -> . expression TIMES expression
+    (5) expression -> . expression DIVIDE expression
+    (6) expression -> . NUMBER
+    (7) expression -> . IDENTIFIER
+    (8) expression -> . LPAREN expression RPAREN
+    (9) expression -> . expression LESS expression
+    (10) expression -> . expression GREATER expression
+
+    NUMBER          shift and go to state 7
+    IDENTIFIER      shift and go to state 8
+    LPAREN          shift and go to state 9
+
+    expression                     shift and go to state 23
+
+state 16
+
+    (9) expression -> expression LESS . expression
+    (2) expression -> . expression PLUS expression
+    (3) expression -> . expression MINUS expression
+    (4) expression -> . expression TIMES expression
+    (5) expression -> . expression DIVIDE expression
+    (6) expression -> . NUMBER
+    (7) expression -> . IDENTIFIER
+    (8) expression -> . LPAREN expression RPAREN
+    (9) expression -> . expression LESS expression
+    (10) expression -> . expression GREATER expression
+
+    NUMBER          shift and go to state 7
+    IDENTIFIER      shift and go to state 8
+    LPAREN          shift and go to state 9
+
+    expression                     shift and go to state 24
+
+state 17
+
+    (10) expression -> expression GREATER . expression
+    (2) expression -> . expression PLUS expression
+    (3) expression -> . expression MINUS expression
+    (4) expression -> . expression TIMES expression
+    (5) expression -> . expression DIVIDE expression
+    (6) expression -> . NUMBER
+    (7) expression -> . IDENTIFIER
+    (8) expression -> . LPAREN expression RPAREN
+    (9) expression -> . expression LESS expression
+    (10) expression -> . expression GREATER expression
+
+    NUMBER          shift and go to state 7
+    IDENTIFIER      shift and go to state 8
+    LPAREN          shift and go to state 9
+
+    expression                     shift and go to state 25
+
+state 18
+
+    (8) expression -> LPAREN expression . RPAREN
+    (2) expression -> expression . PLUS expression
+    (3) expression -> expression . MINUS expression
+    (4) expression -> expression . TIMES expression
+    (5) expression -> expression . DIVIDE expression
+    (9) expression -> expression . LESS expression
+    (10) expression -> expression . GREATER expression
+
+    RPAREN          shift and go to state 26
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 13
+    TIMES           shift and go to state 14
+    DIVIDE          shift and go to state 15
+    LESS            shift and go to state 16
+    GREATER         shift and go to state 17
+
+
+state 19
+
+    (11) statement -> IF expression COLON statement .
+    (12) statement -> IF expression COLON statement . ELSE COLON statement
+    (13) statement -> statement . statement
+    (1) statement -> . IDENTIFIER EQUALS expression
+    (11) statement -> . IF expression COLON statement
+    (12) statement -> . IF expression COLON statement ELSE COLON statement
+    (13) statement -> . statement statement
+
+  ! shift/reduce conflict for ELSE resolved as shift
+  ! shift/reduce conflict for IDENTIFIER resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+    $end            reduce using rule 11 (statement -> IF expression COLON statement .)
+    ELSE            shift and go to state 27
+    IDENTIFIER      shift and go to state 2
+    IF              shift and go to state 3
+
+  ! IDENTIFIER      [ reduce using rule 11 (statement -> IF expression COLON statement .) ]
+  ! IF              [ reduce using rule 11 (statement -> IF expression COLON statement .) ]
+  ! ELSE            [ reduce using rule 11 (statement -> IF expression COLON statement .) ]
+
+    statement                      shift and go to state 4
+
+state 20
+
+    (2) expression -> expression PLUS expression .
+    (2) expression -> expression . PLUS expression
+    (3) expression -> expression . MINUS expression
+    (4) expression -> expression . TIMES expression
+    (5) expression -> expression . DIVIDE expression
+    (9) expression -> expression . LESS expression
+    (10) expression -> expression . GREATER expression
+
+    COLON           reduce using rule 2 (expression -> expression PLUS expression .)
+    PLUS            reduce using rule 2 (expression -> expression PLUS expression .)
+    MINUS           reduce using rule 2 (expression -> expression PLUS expression .)
+    LESS            reduce using rule 2 (expression -> expression PLUS expression .)
+    GREATER         reduce using rule 2 (expression -> expression PLUS expression .)
+    IDENTIFIER      reduce using rule 2 (expression -> expression PLUS expression .)
+    IF              reduce using rule 2 (expression -> expression PLUS expression .)
+    $end            reduce using rule 2 (expression -> expression PLUS expression .)
+    ELSE            reduce using rule 2 (expression -> expression PLUS expression .)
+    RPAREN          reduce using rule 2 (expression -> expression PLUS expression .)
+    TIMES           shift and go to state 14
+    DIVIDE          shift and go to state 15
+
+  ! TIMES           [ reduce using rule 2 (expression -> expression PLUS expression .) ]
+  ! DIVIDE          [ reduce using rule 2 (expression -> expression PLUS expression .) ]
+  ! PLUS            [ shift and go to state 12 ]
+  ! MINUS           [ shift and go to state 13 ]
+  ! LESS            [ shift and go to state 16 ]
+  ! GREATER         [ shift and go to state 17 ]
+
+
+state 21
+
+    (3) expression -> expression MINUS expression .
+    (2) expression -> expression . PLUS expression
+    (3) expression -> expression . MINUS expression
+    (4) expression -> expression . TIMES expression
+    (5) expression -> expression . DIVIDE expression
+    (9) expression -> expression . LESS expression
+    (10) expression -> expression . GREATER expression
+
+    COLON           reduce using rule 3 (expression -> expression MINUS expression .)
+    PLUS            reduce using rule 3 (expression -> expression MINUS expression .)
+    MINUS           reduce using rule 3 (expression -> expression MINUS expression .)
+    LESS            reduce using rule 3 (expression -> expression MINUS expression .)
+    GREATER         reduce using rule 3 (expression -> expression MINUS expression .)
+    IDENTIFIER      reduce using rule 3 (expression -> expression MINUS expression .)
+    IF              reduce using rule 3 (expression -> expression MINUS expression .)
+    $end            reduce using rule 3 (expression -> expression MINUS expression .)
+    ELSE            reduce using rule 3 (expression -> expression MINUS expression .)
+    RPAREN          reduce using rule 3 (expression -> expression MINUS expression .)
+    TIMES           shift and go to state 14
+    DIVIDE          shift and go to state 15
+
+  ! TIMES           [ reduce using rule 3 (expression -> expression MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 3 (expression -> expression MINUS expression .) ]
+  ! PLUS            [ shift and go to state 12 ]
+  ! MINUS           [ shift and go to state 13 ]
+  ! LESS            [ shift and go to state 16 ]
+  ! GREATER         [ shift and go to state 17 ]
+
+
+state 22
+
+    (4) expression -> expression TIMES expression .
+    (2) expression -> expression . PLUS expression
+    (3) expression -> expression . MINUS expression
+    (4) expression -> expression . TIMES expression
+    (5) expression -> expression . DIVIDE expression
+    (9) expression -> expression . LESS expression
+    (10) expression -> expression . GREATER expression
+
+    COLON           reduce using rule 4 (expression -> expression TIMES expression .)
+    PLUS            reduce using rule 4 (expression -> expression TIMES expression .)
+    MINUS           reduce using rule 4 (expression -> expression TIMES expression .)
+    TIMES           reduce using rule 4 (expression -> expression TIMES expression .)
+    DIVIDE          reduce using rule 4 (expression -> expression TIMES expression .)
+    LESS            reduce using rule 4 (expression -> expression TIMES expression .)
+    GREATER         reduce using rule 4 (expression -> expression TIMES expression .)
+    IDENTIFIER      reduce using rule 4 (expression -> expression TIMES expression .)
+    IF              reduce using rule 4 (expression -> expression TIMES expression .)
+    $end            reduce using rule 4 (expression -> expression TIMES expression .)
+    ELSE            reduce using rule 4 (expression -> expression TIMES expression .)
+    RPAREN          reduce using rule 4 (expression -> expression TIMES expression .)
+
+  ! PLUS            [ shift and go to state 12 ]
+  ! MINUS           [ shift and go to state 13 ]
+  ! TIMES           [ shift and go to state 14 ]
+  ! DIVIDE          [ shift and go to state 15 ]
+  ! LESS            [ shift and go to state 16 ]
+  ! GREATER         [ shift and go to state 17 ]
+
+
+state 23
+
+    (5) expression -> expression DIVIDE expression .
+    (2) expression -> expression . PLUS expression
+    (3) expression -> expression . MINUS expression
+    (4) expression -> expression . TIMES expression
+    (5) expression -> expression . DIVIDE expression
+    (9) expression -> expression . LESS expression
+    (10) expression -> expression . GREATER expression
+
+    COLON           reduce using rule 5 (expression -> expression DIVIDE expression .)
+    PLUS            reduce using rule 5 (expression -> expression DIVIDE expression .)
+    MINUS           reduce using rule 5 (expression -> expression DIVIDE expression .)
+    TIMES           reduce using rule 5 (expression -> expression DIVIDE expression .)
+    DIVIDE          reduce using rule 5 (expression -> expression DIVIDE expression .)
+    LESS            reduce using rule 5 (expression -> expression DIVIDE expression .)
+    GREATER         reduce using rule 5 (expression -> expression DIVIDE expression .)
+    IDENTIFIER      reduce using rule 5 (expression -> expression DIVIDE expression .)
+    IF              reduce using rule 5 (expression -> expression DIVIDE expression .)
+    $end            reduce using rule 5 (expression -> expression DIVIDE expression .)
+    ELSE            reduce using rule 5 (expression -> expression DIVIDE expression .)
+    RPAREN          reduce using rule 5 (expression -> expression DIVIDE expression .)
+
+  ! PLUS            [ shift and go to state 12 ]
+  ! MINUS           [ shift and go to state 13 ]
+  ! TIMES           [ shift and go to state 14 ]
+  ! DIVIDE          [ shift and go to state 15 ]
+  ! LESS            [ shift and go to state 16 ]
+  ! GREATER         [ shift and go to state 17 ]
+
+
+state 24
+
+    (9) expression -> expression LESS expression .
+    (2) expression -> expression . PLUS expression
+    (3) expression -> expression . MINUS expression
+    (4) expression -> expression . TIMES expression
+    (5) expression -> expression . DIVIDE expression
+    (9) expression -> expression . LESS expression
+    (10) expression -> expression . GREATER expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+    COLON           reduce using rule 9 (expression -> expression LESS expression .)
+    IDENTIFIER      reduce using rule 9 (expression -> expression LESS expression .)
+    IF              reduce using rule 9 (expression -> expression LESS expression .)
+    $end            reduce using rule 9 (expression -> expression LESS expression .)
+    ELSE            reduce using rule 9 (expression -> expression LESS expression .)
+    RPAREN          reduce using rule 9 (expression -> expression LESS expression .)
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 13
+    TIMES           shift and go to state 14
+    DIVIDE          shift and go to state 15
+    LESS            shift and go to state 16
+    GREATER         shift and go to state 17
+
+  ! PLUS            [ reduce using rule 9 (expression -> expression LESS expression .) ]
+  ! MINUS           [ reduce using rule 9 (expression -> expression LESS expression .) ]
+  ! TIMES           [ reduce using rule 9 (expression -> expression LESS expression .) ]
+  ! DIVIDE          [ reduce using rule 9 (expression -> expression LESS expression .) ]
+  ! LESS            [ reduce using rule 9 (expression -> expression LESS expression .) ]
+  ! GREATER         [ reduce using rule 9 (expression -> expression LESS expression .) ]
+
+
+state 25
+
+    (10) expression -> expression GREATER expression .
+    (2) expression -> expression . PLUS expression
+    (3) expression -> expression . MINUS expression
+    (4) expression -> expression . TIMES expression
+    (5) expression -> expression . DIVIDE expression
+    (9) expression -> expression . LESS expression
+    (10) expression -> expression . GREATER expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+    COLON           reduce using rule 10 (expression -> expression GREATER expression .)
+    IDENTIFIER      reduce using rule 10 (expression -> expression GREATER expression .)
+    IF              reduce using rule 10 (expression -> expression GREATER expression .)
+    $end            reduce using rule 10 (expression -> expression GREATER expression .)
+    ELSE            reduce using rule 10 (expression -> expression GREATER expression .)
+    RPAREN          reduce using rule 10 (expression -> expression GREATER expression .)
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 13
+    TIMES           shift and go to state 14
+    DIVIDE          shift and go to state 15
+    LESS            shift and go to state 16
+    GREATER         shift and go to state 17
+
+  ! PLUS            [ reduce using rule 10 (expression -> expression GREATER expression .) ]
+  ! MINUS           [ reduce using rule 10 (expression -> expression GREATER expression .) ]
+  ! TIMES           [ reduce using rule 10 (expression -> expression GREATER expression .) ]
+  ! DIVIDE          [ reduce using rule 10 (expression -> expression GREATER expression .) ]
+  ! LESS            [ reduce using rule 10 (expression -> expression GREATER expression .) ]
+  ! GREATER         [ reduce using rule 10 (expression -> expression GREATER expression .) ]
+
+
+state 26
+
+    (8) expression -> LPAREN expression RPAREN .
+
+    COLON           reduce using rule 8 (expression -> LPAREN expression RPAREN .)
+    PLUS            reduce using rule 8 (expression -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 8 (expression -> LPAREN expression RPAREN .)
+    TIMES           reduce using rule 8 (expression -> LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 8 (expression -> LPAREN expression RPAREN .)
+    LESS            reduce using rule 8 (expression -> LPAREN expression RPAREN .)
+    GREATER         reduce using rule 8 (expression -> LPAREN expression RPAREN .)
+    IDENTIFIER      reduce using rule 8 (expression -> LPAREN expression RPAREN .)
+    IF              reduce using rule 8 (expression -> LPAREN expression RPAREN .)
+    $end            reduce using rule 8 (expression -> LPAREN expression RPAREN .)
+    ELSE            reduce using rule 8 (expression -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 8 (expression -> LPAREN expression RPAREN .)
+
+
+state 27
+
+    (12) statement -> IF expression COLON statement ELSE . COLON statement
+
+    COLON           shift and go to state 28
+
+
+state 28
+
+    (12) statement -> IF expression COLON statement ELSE COLON . statement
+    (1) statement -> . IDENTIFIER EQUALS expression
+    (11) statement -> . IF expression COLON statement
+    (12) statement -> . IF expression COLON statement ELSE COLON statement
+    (13) statement -> . statement statement
+
+    IDENTIFIER      shift and go to state 2
+    IF              shift and go to state 3
+
+    statement                      shift and go to state 29
+
+state 29
+
+    (12) statement -> IF expression COLON statement ELSE COLON statement .
+    (13) statement -> statement . statement
+    (1) statement -> . IDENTIFIER EQUALS expression
+    (11) statement -> . IF expression COLON statement
+    (12) statement -> . IF expression COLON statement ELSE COLON statement
+    (13) statement -> . statement statement
+
+  ! shift/reduce conflict for IDENTIFIER resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+    $end            reduce using rule 12 (statement -> IF expression COLON statement ELSE COLON statement .)
+    ELSE            reduce using rule 12 (statement -> IF expression COLON statement ELSE COLON statement .)
+    IDENTIFIER      shift and go to state 2
+    IF              shift and go to state 3
+
+  ! IDENTIFIER      [ reduce using rule 12 (statement -> IF expression COLON statement ELSE COLON statement .) ]
+  ! IF              [ reduce using rule 12 (statement -> IF expression COLON statement ELSE COLON statement .) ]
+
+    statement                      shift and go to state 4
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for IDENTIFIER in state 4 resolved as shift
+WARNING: shift/reduce conflict for IF in state 4 resolved as shift
+WARNING: shift/reduce conflict for ELSE in state 19 resolved as shift
+WARNING: shift/reduce conflict for IDENTIFIER in state 19 resolved as shift
+WARNING: shift/reduce conflict for IF in state 19 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 24 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 24 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 24 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 24 resolved as shift
+WARNING: shift/reduce conflict for LESS in state 24 resolved as shift
+WARNING: shift/reduce conflict for GREATER in state 24 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 25 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 25 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 25 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 25 resolved as shift
+WARNING: shift/reduce conflict for LESS in state 25 resolved as shift
+WARNING: shift/reduce conflict for GREATER in state 25 resolved as shift
+WARNING: shift/reduce conflict for IDENTIFIER in state 29 resolved as shift
+WARNING: shift/reduce conflict for IF in state 29 resolved as shift
